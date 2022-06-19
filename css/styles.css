@@ -481,6 +481,11 @@ button {
     flex: 0 1 50%;
   }
 
+  .footer__navbar li {
+    display: block;
+    padding: 0.5rem 1rem;
+  }
+
   /* mobile images */
   .header {
     background-image: url("../images/mobile/image-header.jpg");
