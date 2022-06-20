@@ -10,6 +10,7 @@
   --blue-grayish: hsl(210, 4%, 67%);
   --blue-grayish-dark: hsl(232, 10%, 55%);
   --blue-grayish-darker: hsl(213, 9%, 39%);
+  --blue-opacity: rgba(60, 189, 254, 0.85);
   --white: hsl(0, 0%, 100%);
 }
 
@@ -67,12 +68,21 @@ button {
   min-height: 100vh;
   color: var(--white);
   padding: 1.5rem;
+  position: relative;
 }
 
 .header__container-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 1.5rem;
+  background-color: var(--blue-opacity);
+  z-index: 1000;
 }
 
 .header__logo {
@@ -93,7 +103,7 @@ button {
 
 .header__burger span {
   display: block;
-  width: 26px;
+  width: 1.625rem;
   height: 2px;
   background-color: var(--white);
   transition: all 300ms ease-in-out;
@@ -120,6 +130,7 @@ button {
   transition: color 400ms ease-in-out;
 }
 
+.header__link.active,
 .header__link:hover {
   color: var(--blue-dark-desaturated);
 }
@@ -130,10 +141,10 @@ button {
   padding: 0.75rem 1rem;
   border-radius: 2rem;
   transition: all 400ms ease-in-out;
-  cursor: pointer;
   text-transform: uppercase;
 }
 
+.header__link-contact.active,
 .header__link-contact:hover {
   color: var(--white);
   background-color: var(--blue-dark-desaturated);
@@ -166,7 +177,7 @@ button {
 }
 
 .header__arrow:hover {
-  transform: translateY(8px);
+  transform: translateY(0.5rem);
 }
 
 /* Services section Styles */
@@ -210,8 +221,8 @@ button {
   content: "";
   position: absolute;
   bottom: 0px;
-  left: -7px;
-  width: calc(100% + 14px);
+  left: -0.5rem;
+  width: calc(100% + 1rem);
   height: 0.65rem;
   border-radius: 1rem;
   z-index: -1;
@@ -284,13 +295,15 @@ button {
   color: var(--blue-dark);
 }
 
-/* Testimonials Styles */
-.testimonials {
+/* Testimonials & Contact Styles */
+.testimonials,
+.contact {
   text-align: center;
   padding: 5rem 3rem;
 }
 
-.testimonials__heading {
+.testimonials__heading,
+.contact__heading {
   color: var(--blue-grayish-dark);
   text-transform: uppercase;
   margin-bottom: 3rem;
@@ -320,6 +333,35 @@ button {
 .testimonials footer p {
   color: var(--blue-grayish);
   font-size: 0.9rem;
+}
+
+.contact__form input,
+.contact__form textarea {
+  display: block;
+  min-width: 80%;
+  padding: 0.75rem 1rem;
+  margin: 0 auto 2rem;
+  border: 2px solid var(--blue-grayish);
+}
+
+.contact__form input:focus-visible,
+.contact__form textarea:focus-visible {
+  border-color: var(--blue-dark-desaturated);
+  outline: 0;
+}
+
+.contact__form textarea {
+  resize: vertical;
+  min-height: 10rem;
+}
+
+.contact__form button {
+  background-color: var(--blue-dark-desaturated);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 /* Projects Styles */
@@ -358,6 +400,7 @@ button {
   color: var(--cyan-dark-moderate);
   text-align: center;
   padding: 3rem;
+  position: relative;
 }
 
 .footer__logo {
@@ -400,8 +443,25 @@ button {
   filter: brightness(10);
 }
 
+.footer__top {
+  transform: rotate(180deg);
+  position: absolute;
+  right: 2rem;
+  bottom: 3rem;
+  height: 2.25rem;
+  transition: transform 300ms ease-in-out;
+}
+
+.footer__top:hover {
+  transform: rotate(180deg) translateY(0.5rem);
+}
+
+.footer__top img {
+  height: 100%;
+}
+
 /* Responsiveness on mobile */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 48.0625em) {
   .header__burger {
     display: block;
   }
@@ -415,11 +475,14 @@ button {
     position: absolute;
     left: 10%;
     width: 80%;
-    top: 5rem;
+    top: 4.9375rem;
     text-align: center;
     padding: 1.5rem 0;
     z-index: 999;
     display: none;
+    border-width: 0 2px 2px 2px;
+    border-style: solid;
+    border-color: var(--blue-grayish-darker);
   }
 
   .header__menu li:not(:last-child) {
@@ -431,26 +494,27 @@ button {
     display: block;
     background-color: var(--white);
     position: absolute;
-    right: 0;
-    top: -20px;
-    width: 20px;
-    height: 20px;
+    right: -1px;
+    top: -1.1875rem;
+    width: 1.25rem;
+    height: 1.25rem;
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
   }
 
-  .header__link,
-  .header__link:hover {
+  .header__link {
     color: var(--blue-grayish-dark);
   }
 
   .header__link-contact {
     background-color: var(--yellow);
+    color: var(--blue-dark-desaturated);
     display: inline-block;
   }
 
+  .header__link-contact.active,
   .header__link-contact:hover {
-    background-color: var(--yellow);
-    color: var(--blue-dark-desaturated);
+    color: var(--yellow);
+    background-color: var(--blue-dark-desaturated);
   }
 
   .header__text {

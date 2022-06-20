@@ -4,6 +4,7 @@ const headerMenu = document.querySelector(".header__menu");
 const footerMenu = document.querySelector(".footer__navbar");
 const headerArrow = document.querySelector(".header__arrow");
 const headerBurger = document.querySelector(".header__burger");
+const footerTop = document.querySelector(".footer__top");
 
 // Header & Footer navbar links
 menuSections.forEach((item) => {
@@ -24,11 +25,19 @@ menuSections.forEach((item) => {
   headerMenu.appendChild(headerLi);
 });
 
-// Header Contact Li
-const headerContact = document.createElement("li");
-headerContact.classList.add("header__link-contact");
-headerContact.innerText = "Contact";
-headerMenu.appendChild(headerContact);
+// Add/Remove active class function
+const navActiveSection = (sectionId) => {
+  headerLinks.forEach((link) => {
+    if (sectionId === link.innerText.toLowerCase()) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+};
+
+const headerLinks = document.querySelectorAll(".header__link");
+const footerLinks = document.querySelectorAll(".footer__navbar a");
 
 // Scroll to selected section
 const scrollToSection = (e) => {
@@ -37,15 +46,18 @@ const scrollToSection = (e) => {
   const sectionId = e.target.getAttribute("href").slice(1);
 
   window.scrollTo({
-    top: document.getElementById(sectionId).offsetTop,
+    // 79 = the height of the navbar
+    top: document.getElementById(sectionId).offsetTop - 79,
     behavior: "smooth",
   });
+
+  console.log(document.getElementById(sectionId).offsetTop);
+
+  // Add/Remove active class
+  navActiveSection(sectionId);
 };
 
 // EventListeners
-const headerLinks = document.querySelectorAll(".header__link");
-const footerLinks = document.querySelectorAll(".footer__navbar a");
-
 headerLinks.forEach((link) => {
   link.addEventListener("click", scrollToSection);
 });
@@ -56,7 +68,19 @@ footerLinks.forEach((link) => {
 
 headerArrow.addEventListener("click", scrollToSection);
 
+// Header Contact adding class
+headerLinks[headerLinks.length - 1].classList.add("header__link-contact");
+
 // Burger menu
 headerBurger.addEventListener("click", () => {
   headerBurger.classList.toggle("opened");
+});
+
+// Go to top
+footerTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  headerLinks.forEach((link) => {
+    link.classList.remove("active");
+  });
 });
