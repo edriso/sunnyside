@@ -51,8 +51,6 @@ const scrollToSection = (e) => {
     behavior: "smooth",
   });
 
-  console.log(document.getElementById(sectionId).offsetTop);
-
   // Add/Remove active class
   navActiveSection(sectionId);
 };
